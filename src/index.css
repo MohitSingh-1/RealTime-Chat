@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.contacts-scrollbar::-webkit-scrollbar {
+  width: 0.25rem;
+}
+.contacts-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 1rem;
+}
+
+.CBI{
+    border:2px solid red;
+}
