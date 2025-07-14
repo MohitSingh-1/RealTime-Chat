@@ -1,4 +1,4 @@
-export const host = "http://localhost:4500";
+export const host = "https://realtime-chat-3qan.onrender.com";
 
 
 export const loginRoute = `${host}/api/auth/login`;
