@@ -45,22 +45,22 @@ export default function ChatContainer({ currentChat, socket }) {
     setMessages(msgs);
   };
 
-useEffect(() => {
-  if (!socket.current) return;
+  useEffect(() => {
+    if (!socket.current) return;
 
-  console.log("Socket available in ChatContainer");
+    console.log("Socket available in ChatContainer");
 
-  const handleReceiveMessage = (msg) => {
-    console.log("Message received via socket:", msg);
-    setArrivalMessage({ fromSelf: false, message: msg });
-  };
+    const handleReceiveMessage = (msg) => {
+      console.log("Message received via socket:", msg);
+      setArrivalMessage({ fromSelf: false, message: msg });
+    };
 
-  socket.current.on("msg-recieve", handleReceiveMessage);
+    socket.current.on("msg-recieve", handleReceiveMessage);
 
-  return () => {
-    socket.current.off("msg-recieve", handleReceiveMessage);
-  };
-}, [socket.current]);
+    return () => {
+      socket.current.off("msg-recieve", handleReceiveMessage);
+    };
+  }, [socket.current]);
 
 
 
