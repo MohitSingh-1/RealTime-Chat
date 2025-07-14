@@ -11,3 +11,29 @@
 .CBI{
     border:2px solid red;
 }
+
+.Toastify__toast-container {
+  z-index: 9999 !important;
+}
+
+.Toastify__toast {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .Toastify__toast-container {
+    width: 90% !important;
+    left: 5% !important;
+    right: 5% !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .toast-container {
+    right: 0.5rem !important;
+    left: 0.5rem !important;
+    width: calc(100vw - 1rem);
+  }
+}

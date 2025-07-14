@@ -9,7 +9,7 @@ import { FaHandsClapping } from "react-icons/fa6";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
   const toastOptions = {
     position: "top-right",
@@ -31,8 +31,8 @@ export default function Login() {
   };
 
   const validateForm = () => {
-    const { username, password } = formData;
-    if (username === "" || password === "") {
+    const { email, password } = formData;
+    if (email === "" || password === "") {
       toast.error("Email and Password is required.", toastOptions);
       return false;
     }
@@ -42,9 +42,9 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
-      const { username, password } = formData;
+      const { email, password } = formData;
       const res = await axios.post(loginRoute, {
-        username,
+        email,
         password,
       });
       if (!res || res.data.status === false) {
@@ -57,7 +57,7 @@ export default function Login() {
             import.meta.env.VITE_LOCALHOST_KEY,
             JSON.stringify(res.data.user)
         );
-        navigate("/signup");
+        navigate("/");
       }
     }
   };
@@ -70,8 +70,8 @@ export default function Login() {
           className="bg-black bg-opacity-60 backdrop-blur-md p-8 sm:p-12 rounded-2xl flex flex-col gap-6 w-full max-w-md shadow-lg"
         >
           <div className="flex items-center justify-center gap-4 mb-2">
-            <img src={Logo} alt="logo" className="h-20" />
-            <h1 className="text-2xl text-white uppercase font-bold tracking-wider">
+            <img src={Logo} alt="logo" className="md:h-20 h-10" />
+            <h1 className="text-lg md:text-2xl text-white uppercase font-bold tracking-wider">
               Snappy
             </h1>
           </div>
@@ -81,9 +81,9 @@ export default function Login() {
           </div>
 
           <input
-            type="text"
-            placeholder="Username"
-            name="username"
+            type="email"
+            placeholder="Enter your email"
+            name="email"
             onChange={handleChange}
             className="bg-transparent border border-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 placeholder-gray-400"
           />

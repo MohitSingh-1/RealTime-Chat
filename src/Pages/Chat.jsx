@@ -14,18 +14,32 @@ export default function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
 
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      if (!localStorage.getItem(import.meta.env.VITE_LOCALHOST_KEY)) {
-        navigate("/login");
+ useEffect(() => {
+  const fetchCurrentUser = async () => {
+    const storedUser = localStorage.getItem(import.meta.env.VITE_LOCALHOST_KEY);
+    console.log("Stored User String => ", storedUser);
+
+    try {
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser) {
+          setCurrentUser(parsedUser);
+        } else {
+          navigate("/login");
+        }
       } else {
-        setCurrentUser(
-          await JSON.parse(localStorage.getItem(import.meta.env.VITE_LOCALHOST_KEY))
-        );
+        navigate("/login");
       }
-    };
-    fetchCurrentUser();
-  }, []);
+    } catch (err) {
+      console.error("Failed to parse stored user:", err);
+      localStorage.removeItem(import.meta.env.VITE_LOCALHOST_KEY); // clean up bad data
+      navigate("/login");
+    }
+  };
+
+  fetchCurrentUser();
+}, []);
+
 
   useEffect(() => {
     if (currentUser) {
@@ -55,8 +69,8 @@ export default function Chat() {
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-[#131324]">
       <div
-        className="h-[85vh] w-[85vw] bg-black bg-opacity-40 grid grid-cols-[25%_75%] 
-        md:grid-cols-[35%_65%] rounded-lg overflow-hidden"
+        className="h-full w-full bg-black bg-opacity-40 grid grid-cols-[25%_75%] 
+        md:grid-cols-[20%_80%] rounded-lg overflow-hidden"
       >
         <Contacts contacts={contacts} changeChat={handleChatChange} />
         {currentChat === undefined ? (

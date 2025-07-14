@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { Buffer } from "buffer";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import "react-toastify/dist/ReactToastify.css";
 import loader from "../assets/loader.gif";
@@ -50,7 +49,7 @@ export default function SetAvatar() {
   useEffect(() => {
     const loadAvatars = async () => {
       const data = [];
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 7; i++) {
         const svg = multiavatar(Math.round(Math.random() * 1000));
         const base64 = btoa(unescape(encodeURIComponent(svg)));
         data.push(base64);

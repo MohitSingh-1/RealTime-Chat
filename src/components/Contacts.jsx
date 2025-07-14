@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../assets/logo.svg";
+import Logout from "../components/Logout";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState();
@@ -20,7 +21,7 @@ export default function Contacts({ contacts, changeChat }) {
   return (
     <>
       {currentUserImage && currentUserName && (
-        <div className="grid grid-rows-[8%_1fr_10%] bg-[#080420] h-full overflow-hidden">
+        <div className="grid grid-rows-[8%_1fr_8%] bg-[#080420] h-full overflow-hidden">
           {/* Logo */}
           <div className="flex items-center justify-center gap-2 py-1">
             <img src={Logo} alt="logo" className="h-5 w-5" />
@@ -50,13 +51,18 @@ export default function Contacts({ contacts, changeChat }) {
           </div>
 
           {/* Current User */}
-          <div className="flex items-center justify-center gap-2 px-2 py-2 bg-[#0d0d30]">
-            <img
-              src={`data:image/svg+xml;base64,${currentUserImage}`}
-              alt="avatar"
-              className="h-8 w-8"
-            />
-            <h2 className="text-white text-xs font-medium truncate">{currentUserName}</h2>
+          <div className="flex flex-row justify-between bg-[#0d0d30] px-4">
+            <div className="flex items-center justify-center gap-2 px-2 py-2">
+              <img
+                src={`data:image/svg+xml;base64,${currentUserImage}`}
+                alt="avatar"
+                className="h-8 w-8"
+              />
+              <h2 className="text-white text-xs font-medium truncate">{currentUserName}</h2>
+            </div>
+            <div className=" items-center flex justify-center">
+              <Logout/>
+            </div>
           </div>
         </div>
       )}
