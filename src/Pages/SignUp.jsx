@@ -9,6 +9,7 @@ import { signupRoute } from "../utils/APIRoutes";
 
 
 export default function SignUp() {
+  const [creatingAccount, setCreatingAccount] = useState(false);
   const navigate = useNavigate();
 
 
@@ -48,6 +49,7 @@ export default function SignUp() {
   };
 
    const handleSubmit = async (event) => {
+    setCreatingAccount(true);
     event.preventDefault();
     if (handleValidation()) {
       const { email, username, password } = formData;
@@ -57,15 +59,15 @@ export default function SignUp() {
         password,
       });
       console.log(data);
-      if (data.status === false) {
-        console.log("false me haii");
-        toast.error(data.msg);
-      }
+
       if (data.status === true) {
         toast.success(data.msg)
         navigate("/login");
+      }else {
+        toast.error(data.msg);
       }
     }
+    setCreatingAccount(false);
   };
 
   return (
@@ -113,9 +115,15 @@ export default function SignUp() {
 
           <button
             type="submit"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold uppercase"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 cursor-pointer rounded-md font-semibold uppercase"
           >
-            Create User
+            {
+              creatingAccount ? (
+                <p>Account Creating...</p>
+              ):(
+                <p>Create User</p>
+              )
+            }
           </button>
 
           <span className="text-white text-center text-sm uppercase">

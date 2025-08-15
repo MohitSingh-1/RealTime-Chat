@@ -21,7 +21,7 @@ export default function Contacts({ contacts, changeChat }) {
   return (
     <>
       {currentUserImage && currentUserName && (
-        <div className="grid grid-rows-[8%_1fr_8%] bg-[#080420] h-full overflow-hidden">
+        <div className="grid  grid-rows-[8%_1fr_8%] bg-[#080420] h-full overflow-hidden">
           {/* Logo */}
           <div className="flex items-center justify-center gap-2 py-1">
             <img src={Logo} alt="logo" className="h-5 w-5" />

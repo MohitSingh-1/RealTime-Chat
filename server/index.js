@@ -30,7 +30,8 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "https://real-time-chat-pink-nu.vercel.app",
+    // origin: "https://real-time-chat-pink-nu.vercel.app",
+    origin:" http://localhost:5173/",
     credentials: true,
   },
 });

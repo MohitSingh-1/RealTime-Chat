@@ -67,12 +67,14 @@ export default function Chat() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center bg-[#131324]">
+    <div className="h-screen  w-screen flex flex-col justify-center items-center bg-[#131324]">
       <div
-        className="h-full w-full bg-black bg-opacity-40 grid grid-cols-[25%_75%] 
+        className="h-full w-full bg-black bg-opacity-40 grid 
         md:grid-cols-[20%_80%] rounded-lg overflow-hidden"
       >
-        <Contacts contacts={contacts} changeChat={handleChatChange} />
+        <div className="hidden md:block">
+          <Contacts contacts={contacts} changeChat={handleChatChange} />
+        </div>
         {currentChat === undefined ? (
           <Welcome />
         ) : (

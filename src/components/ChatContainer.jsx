@@ -3,8 +3,11 @@ import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
+import { IoReorderThreeSharp } from "react-icons/io5";
+import Contacts from "./Contacts";
 
 export default function ChatContainer({ currentChat, socket }) {
+  const [menu, setMenu] = useState(false);
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -76,19 +79,24 @@ export default function ChatContainer({ currentChat, socket }) {
   }, [messages]);
 
   return (
-    <div className="relative flex flex-col h-full w-full overflow-hidden">
+    <div className="relative  flex flex-col h-full w-full overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-2 h-[8%] bg-[#0e0e2e] border-l-2 border-gray-700">
-        <div className="flex items-center gap-4">
+      <div className="flex items-center md:justify-between md:px-6 px-2 py-2 h-[8%] bg-[#0e0e2e] border-l-2 border-gray-700">
+        <div className="md:hidden pr-4" onClick={()=>{
+          setMenu(!menu);
+        }}>
+          <IoReorderThreeSharp className="text-white text-3xl "/>
+        </div>
+        <div className="flex items-center gap-2">
           <img
             src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
             alt="avatar"
-            className="h-12"
+            className="h-9"
           />
           <h3 className="text-white text-lg">{currentChat.username}</h3>
         </div>
       </div>
-
+      
       {/* Messages */}
       <div className="flex flex-col gap-4 px-6 py-4 overflow-y-auto custom-scrollbar h-[82%] bg-gradient-to-br from-indigo-700 via-purple-800 to-indigo-700">
         {messages.map((message) => (

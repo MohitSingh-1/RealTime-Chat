@@ -9,6 +9,7 @@ import { FaHandsClapping } from "react-icons/fa6";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [loggingIn, setLoggingIn] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const toastOptions = {
@@ -40,6 +41,7 @@ export default function Login() {
   };
 
   const handleSubmit = async (event) => {
+    setLoggingIn(true);
     event.preventDefault();
     if (validateForm()) {
       const { email, password } = formData;
@@ -60,6 +62,7 @@ export default function Login() {
         navigate("/");
       }
     }
+    setLoggingIn(false);
   };
 
   return (
@@ -99,7 +102,13 @@ export default function Login() {
             type="submit"
             className="bg-indigo-600 hover:bg-indigo-700 hover:scale-95 transition-all duration-200 cursor-pointer text-white py-2 rounded-md font-semibold uppercase"
           >
-            Log In
+            {
+              loggingIn ? (
+                <p>Logging In..</p>
+              ):(
+                <p>Log In</p>
+              )
+            }
           </button>
 
           <span className="text-white text-center text-sm uppercase">
