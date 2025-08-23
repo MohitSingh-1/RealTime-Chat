@@ -28,6 +28,7 @@ const [screenHeight, setScreenHeight] = useState(window.innerHeight);
     };
     if (currentChat) getMessages();
   }, [currentChat]);
+  
 
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
@@ -54,11 +55,10 @@ const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   useEffect(() => {
     if (!socket.current) return;
 
-    console.log("Socket available in ChatContainer");
-
-    const handleReceiveMessage = (msg) => {
-      console.log("Message received via socket:", msg);
-      setArrivalMessage({ fromSelf: false, message: msg });
+    const handleReceiveMessage = ({ from, msg }) => {
+      if (currentChat && currentChat._id === from) {
+        setArrivalMessage({ fromSelf: false, message: msg });
+      }
     };
 
     socket.current.on("msg-recieve", handleReceiveMessage);
@@ -66,7 +66,7 @@ const [screenHeight, setScreenHeight] = useState(window.innerHeight);
     return () => {
       socket.current.off("msg-recieve", handleReceiveMessage);
     };
-  }, [socket.current]);
+  }, [socket.current, currentChat]);
 
 
 
