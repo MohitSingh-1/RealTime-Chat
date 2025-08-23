@@ -1,6 +1,5 @@
-// export const host = "https://realtime-chat-3qan.onrender.com";
 export const host = import.meta.env.VITE_BASE_URL;
-// console.log("host",host);
+
 export const loginRoute = `${host}/api/auth/login`;
 export const signupRoute = `${host}/api/auth/register`;
 export const logoutRoute = `${host}/api/auth/logout`;
