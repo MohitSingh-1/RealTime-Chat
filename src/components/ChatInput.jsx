@@ -34,7 +34,7 @@ export default function ChatInput({ handleSendMsg }) {
 
       <form
         onSubmit={sendChat}
-        className="w-full bg-[#1f1f3a] rounded-full flex items-center gap-3 px-4 py-2"
+        className="w-full bg-[#1f1f3a] rounded-full flex items-center gap-3 px-4 py-1"
       >
         {/* Emoji Button */}
         <BsEmojiSmileFill

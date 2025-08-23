@@ -6,11 +6,14 @@ import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 import { IoReorderThreeSharp } from "react-icons/io5";
 import Contacts from "./Contacts";
 
-export default function ChatContainer({ currentChat, socket }) {
-  const [menu, setMenu] = useState(false);
+export default function ChatContainer({ currentChat, socket, setMenu, menu }) {
+  
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
+const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+
 
   useEffect(() => {
     const getMessages = async () => {
@@ -79,14 +82,14 @@ export default function ChatContainer({ currentChat, socket }) {
   }, [messages]);
 
   return (
-    <div className="relative  flex flex-col h-full w-full overflow-hidden">
+    <div className="relative flex flex-col h-full w-full overflow-hidden">
       {/* Header */}
       <div className="flex items-center md:justify-between md:px-6 px-2 py-2 h-[8%] bg-[#0e0e2e] border-l-2 border-gray-700">
-        <div className="md:hidden pr-4" onClick={()=>{
+        {/* <div className="md:hidden pr-4" onClick={()=>{
           setMenu(!menu);
         }}>
           <IoReorderThreeSharp className="text-white text-3xl "/>
-        </div>
+        </div> */}
         <div className="flex items-center gap-2">
           <img
             src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
@@ -98,7 +101,7 @@ export default function ChatContainer({ currentChat, socket }) {
       </div>
       
       {/* Messages */}
-      <div className="flex flex-col gap-4 px-6 py-4 overflow-y-auto custom-scrollbar h-[82%] bg-gradient-to-br from-indigo-700 via-purple-800 to-indigo-700">
+      <div className="flex flex-col gap-4 px-6 pt-10 pb-20 overflow-y-auto custom-scrollbar bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900" style={{height:isMobile ? screenHeight - (screenHeight>700?160:screenHeight>600?170:170) : screenHeight - 120}}>
         {messages.map((message) => (
           <div
             key={uuidv4()}

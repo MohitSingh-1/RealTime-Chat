@@ -20,7 +20,7 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div className="flex flex-col bg-indigo-900 items-center justify-center text-white text-center px-4">
+    <div className="flex h-full flex-col bg-indigo-900 items-center justify-center text-white text-center px-4">
       <img src={Robot} alt="robot" className="h-72 md:h-80" />
       <h1 className="text-2xl md:text-3xl font-semibold mt-4">
         Welcome, <span className="text-blue-400">{userName}!</span>
